@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <p>MY WEEKEND TASKS IN NEW HAMPSHIRE:</p>
+
+
+    <div id="avaWeekendSpot">
+    </div>
+
+
+</head>
+
+<body>
+
+    <button type="button" onclick="avaWeekend.weekendTaskComplete()">Get IT Done</button>
+
+    <script>
+        var avaWeekend = {
+
+            weekendTasks: [["Go To New Hampshire"], ["Drink Wine"], ["See Waterfalls"], ["Not Get Eaten By Bears"]],
+            completedTasks: [[], [], [], []],
+
+            //Does there always have to be empty nested arrays for the exact amount of arrays that we are pushing/splicing into that array? 
+
+
+            avaListToDo: function () {
+                var avaListTasks = "<select id='selectedTask'>";
+                for (var i = 0; i < this.weekendTasks.length; i++) {
+                    for (var j = 0; j < this.weekendTasks[i].length; j++) {
+
+
+                        avaListTasks += "<option value=" + this.weekendTasks[i][j] + ">" + this.weekendTasks[i][j] + "</option>";
+
+                    }
+
+                }
+                avaListTasks += "</select>";
+                document.getElementById("avaWeekendSpot").innerHTML = avaListTasks;
+            },
+
+            avaListComplete: function () {
+                var generateTask = document.getElementById("selectedTask").value;
+                for (var i = 0; i < this.weekendTasks.length; i++) {
+                    for (var j = 0; j < this.weekendTasks[i].length; j++) {
+                        if (this.generateTask == this.weekendTasks[i][j]) {
+                            this.completedTasks[i].push(this.weekendTasks[i].splice(j, 1));
+
+                            avaHotel.avaListComplete();
+                            avaHotel.avaListToDo(); 
+                
+                
+                        }
+
+                    }
+                    
+                
+                }
+
+                this.avaListToDo();
+                alert("I see you've chosen " + generateTask + ", stay safe out there, pardner.");
+
+            }
+        
+        };
+
+    
+        avaWeekend.avaListToDo();
+        avaWeekend.avaListComplete(); 
+
+
+
+    </script>
+</body>
+
+</html>
