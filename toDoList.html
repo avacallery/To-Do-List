@@ -3,24 +3,34 @@
 
 <head>
 
-    <p>MY WEEKEND TASKS IN NEW HAMPSHIRE:</p>
-
-
-    <div id="avaWeekendSpot">
-    </div>
-
 
 </head>
 
 <body>
 
-    <button type="button" onclick="avaWeekend.weekendTaskComplete()">Get IT Done</button>
+        <p>MY WEEKEND TASKS IN NEW HAMPSHIRE:</p>
+
+
+        <div id="avaWeekendSpot">
+        </div>
+    
+
+
+    <button type="button" onclick="avaWeekend.avaListSelect()">Get IT Done</button>
+
+    <br> 
+<br> 
+
+<p>WEEKEND TASKS ACCOMPLISHED:</p>
+    <div id="completedTasksDone">
+
+    </div>
 
     <script>
         var avaWeekend = {
 
-            weekendTasks: [["Go To New Hampshire"], ["Drink Wine"], ["See Waterfalls"], ["Not Get Eaten By Bears"]],
-            completedTasks: [[], [], [], []],
+            weekendTasks:[["Go To New Hampshire"], ["Drink Wine"], ["See Waterfalls"], ["Not Get Eaten By Bears"]],
+            completedTasks: [ [], [], [], [] ],
 
             //Does there always have to be empty nested arrays for the exact amount of arrays that we are pushing/splicing into that array? 
 
@@ -31,7 +41,8 @@
                     for (var j = 0; j < this.weekendTasks[i].length; j++) {
 
 
-                        avaListTasks += "<option value=" + this.weekendTasks[i][j] + ">" + this.weekendTasks[i][j] + "</option>";
+                        //avaListTasks += "<option value='" + this.weekendTasks[i][j] + "'>" + this.weekendTasks[i][j] + "</option>";
+                        avaListTasks += `<option value="${this.weekendTasks[i][j]}">${this.weekendTasks[i][j]}</option>`; 
 
                     }
 
@@ -40,15 +51,16 @@
                 document.getElementById("avaWeekendSpot").innerHTML = avaListTasks;
             },
 
-            avaListComplete: function () {
-                var generateTask = document.getElementById("selectedTask").value;
+            avaListSelect: function () {
+                var generateTask = document.getElementById('selectedTask').value;
                 for (var i = 0; i < this.weekendTasks.length; i++) {
                     for (var j = 0; j < this.weekendTasks[i].length; j++) {
-                        if (this.generateTask == this.weekendTasks[i][j]) {
+                        if (generateTask == this.weekendTasks[i][j]) {
                             this.completedTasks[i].push(this.weekendTasks[i].splice(j, 1));
+                            console.log("calling avaListToDo");
 
-                            avaHotel.avaListComplete();
-                            avaHotel.avaListToDo(); 
+                            avaWeekend.avaListToDo(); 
+                            avaWeekend.avaCompletedTaskFunction();
                 
                 
                         }
@@ -59,7 +71,25 @@
                 }
 
                 this.avaListToDo();
-                alert("I see you've chosen " + generateTask + ", stay safe out there, pardner.");
+                alert("I see you've chosen "+generateTask + ". Stay safe out there, partner.");
+
+            }, 
+
+            avaCompletedTaskFunction: function() { 
+                var finishedTaskList = "<select id='completedTasksDone'>"; 
+                for (var i = 0; i < this.completedTasks.length; i++) {
+                    for (var j = 0; j < this.completedTasks[i].length; j++) { 
+
+                        finishedTaskList += "<option value=" + this.completedTasks[i][j] + ">" +this.completedTasks[i][j]+ "</option>";
+
+                    }
+
+
+                }
+
+                finishedTaskList += "</select>";
+                document.getElementById('completedTasksDone').innerHTML = finishedTaskList; 
+
 
             }
         
@@ -67,7 +97,7 @@
 
     
         avaWeekend.avaListToDo();
-        avaWeekend.avaListComplete(); 
+        avaWeekend.avaCompletedTaskFunction(); 
 
 
 
